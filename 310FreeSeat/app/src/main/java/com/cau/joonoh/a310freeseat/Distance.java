@@ -7,4 +7,5 @@ public class Distance{
     public int key;
     public int value;
 
+
 }
