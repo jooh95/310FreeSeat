@@ -206,6 +206,7 @@ public class Graph {
     }
 
     public String[] algorithm(int sKey, int time){
+        Log.d("key",""+ sKey);
         Distance dist[] = new Distance[128];
         ArrayList<ArrayList<Integer>> path= new ArrayList<ArrayList<Integer>>();
 
@@ -242,7 +243,7 @@ public class Graph {
                     temp.add(edges.get(j).dnode);
                     path.get(edges.get(j).dnode).clear();
                     path.get(edges.get(j).dnode).addAll(temp);
-
+                    Log.d("change node" , node[edges.get(j).dnode].name);
                     dist[edges.get(j).dnode].value = dist[edges.get(j).snode].value + edges.get(j).weight;
                     String result = new String("");
 //                    for(int k = 0; k < path.get(i).size(); k++){
@@ -254,6 +255,8 @@ public class Graph {
                 }
             }
         }
+
+
 
 
         Arrays.sort(dist, new Comparator<Distance>() {
@@ -271,6 +274,11 @@ public class Graph {
             }
         });
 
+        for(int i = 0; i < 128; i++){
+            Log.d("value", dist[i].value + "");
+            Log.d("key", dist[i].key + "");
+        }
+
         Calendar cal = Calendar.getInstance();
 
         int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;   //요일
@@ -281,6 +289,14 @@ public class Graph {
 
         String[] dump = new String[2];
 
+
+        Log.d("key", "" +node[dist[0].key].isRoom);
+        Log.d("key", "" +node[dist[0].key].name);
+        Log.d("key", "" +node[dist[0].key].time[2][3]);
+        Log.d("key", "" +node[dist[0].key].key);
+        Log.d("dayNum",""+(dayNum-2));
+        Log.d("dayHour",""+(dayHour-8));
+        Log.d("time",""+time);
         for(int i = 0; i < 128; i++){
             if(node[dist[i].key].isRoom){
                 int count = 0;
@@ -291,20 +307,21 @@ public class Graph {
                     }
                 }
                 if(count == time){//강의실이 이용가능할 때,
-                    result = new String[1+path.get(i).size()];
-                    result[0] = new String(node[i].name);
+                    result = new String[1+path.get(dist[i].key).size()];
+                    result[0] = new String(node[dist[i].key].name);
 
                     Log.d("path size", path.get(i).size() + "");
 
-                    for(int k = 0; k < path.get(i).size(); k++){
-                        result[k+1] =  node[path.get(i).get(k)].name;
-                        Log.d("aaaaa", node[path.get(i).get(k)].name);
+                    for(int k = 0; k < path.get(dist[i].key).size(); k++){
+                        result[k+1] =  node[path.get(dist[i].key).get(k)].name;
+                        Log.d("aaaaa", node[path.get(dist[i].key).get(k)].name);
                     }
 
                     return  result;
 
 
                 }else{
+                    Log.d("else","sdfsdfsdfdsfdsfds");
                     continue;//이용가능하지 않으면 continue
                 }
             }
