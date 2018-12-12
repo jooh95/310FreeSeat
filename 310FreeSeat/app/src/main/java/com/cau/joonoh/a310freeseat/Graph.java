@@ -290,13 +290,6 @@ public class Graph {
         String[] dump = new String[2];
 
 
-        Log.d("key", "" +node[dist[0].key].isRoom);
-        Log.d("key", "" +node[dist[0].key].name);
-        Log.d("key", "" +node[dist[0].key].time[2][3]);
-        Log.d("key", "" +node[dist[0].key].key);
-        Log.d("dayNum",""+(dayNum-2));
-        Log.d("dayHour",""+(dayHour-8));
-        Log.d("time",""+time);
         for(int i = 0; i < 128; i++){
             if(node[dist[i].key].isRoom){
                 int count = 0;
@@ -324,7 +317,9 @@ public class Graph {
                     Log.d("else","sdfsdfsdfdsfdsfds");
                     continue;//이용가능하지 않으면 continue
                 }
-            }
+            }else
+            {continue;}
+
         }
 
 
